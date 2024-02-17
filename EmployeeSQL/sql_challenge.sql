@@ -62,3 +62,17 @@ SELECT * FROM dept_manager
 
 -- Confirm data correctly imported into salaries table
 SELECT * FROM salaries
+
+-- Data Analysis
+-- 1. List the employee number, last name, first name, sex, and salary of each employee.
+SELECT e.emp_no, e.last_name, e.first_name, e.sex, s.salary
+FROM employees as e 
+INNER JOIN salaries AS s ON 
+s.emp_no = e.emp_no;
+
+-- 2. List the first name, last name, and hire date for the employees who were hired in 1986.
+-- date_part function notation from https://stackoverflow.com/questions/9891025/sql-select-from-column-where-year-2010
+SELECT first_name, last_name, hire_date
+FROM employees
+WHERE date_part('year', hire_date) = 1986
+
