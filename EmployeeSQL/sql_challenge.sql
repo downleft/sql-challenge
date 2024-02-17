@@ -55,13 +55,13 @@ SELECT * FROM titles;
 SELECT * FROM employees;
 
 -- Confirm data correctly imported into dept_emp table
-SELECT * FROM dept_emp
+SELECT * FROM dept_emp;
 
 -- Confirm data correctly imported into dept_manager table
-SELECT * FROM dept_manager
+SELECT * FROM dept_manager;
 
 -- Confirm data correctly imported into salaries table
-SELECT * FROM salaries
+SELECT * FROM salaries;
 
 -- Data Analysis
 -- 1. List the employee number, last name, first name, sex, and salary of each employee.
@@ -71,8 +71,15 @@ INNER JOIN salaries AS s ON
 s.emp_no = e.emp_no;
 
 -- 2. List the first name, last name, and hire date for the employees who were hired in 1986.
--- date_part function notation from https://stackoverflow.com/questions/9891025/sql-select-from-column-where-year-2010
+-- date_part function notation from https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/
 SELECT first_name, last_name, hire_date
 FROM employees
 WHERE date_part('year', hire_date) = 1986
 
+-- 3. List the manager of each department along with their department number, department name, employee number, last name, and first name.
+SELECT dm.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
+FROM dept_manager AS dm
+INNER JOIN departments AS d ON 
+dm.dept_no = d.dept_no
+INNER JOIN employees AS e ON
+dm.emp_no = e.emp_no
