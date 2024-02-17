@@ -74,12 +74,22 @@ s.emp_no = e.emp_no;
 -- date_part function notation from https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/
 SELECT first_name, last_name, hire_date
 FROM employees
-WHERE date_part('year', hire_date) = 1986
+WHERE date_part('year', hire_date) = 1986;
 
--- 3. List the manager of each department along with their department number, department name, employee number, last name, and first name.
+-- 3. List the manager of each department along with their department number, department name, 
+-- employee number, last name, and first name.
 SELECT dm.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
 FROM dept_manager AS dm
 INNER JOIN departments AS d ON 
 dm.dept_no = d.dept_no
 INNER JOIN employees AS e ON
-dm.emp_no = e.emp_no
+dm.emp_no = e.emp_no;
+
+-- 4. List the department number for each employee along with that employee’s employee number, 
+-- last name, first name, and department name.
+SELECT de.dept_no, de.emp_no, e.last_name, e.first_name, d.dept_name
+FROM employees AS e
+INNER JOIN dept_emp AS de ON
+de.emp_no = e.emp_no
+INNER JOIN departments AS d ON 
+d.dept_no = de.dept_no;
