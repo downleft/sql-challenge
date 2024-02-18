@@ -1,17 +1,19 @@
 -- Create Departments Table
 CREATE TABLE departments (
 	dept_no VARCHAR(4) PRIMARY KEY,
-	dept_name VARCHAR(30)
+	dept_name VARCHAR(30) NOT NULL
 );
 
+-- Create Titles Table
 CREATE TABLE titles (
 	title_id VARCHAR(5) PRIMARY KEY,
-	title VARCHAR(30)
+	title VARCHAR(30) NOT NULL
 );
 
+-- Create Employees Table
 CREATE TABLE employees (
 	emp_no INT PRIMARY KEY,
-	emp_title_id VARCHAR(5),
+	emp_title_id VARCHAR(5) NOT NULL,
 	FOREIGN KEY (emp_title_id) REFERENCES titles(title_id),
 	birth_date DATE,
 	first_name VARCHAR(30),
@@ -22,18 +24,18 @@ CREATE TABLE employees (
 
 -- Create Department Employees Table
 CREATE TABLE dept_emp (
-	emp_no INT,
+	emp_no INT NOT NULL,
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
-	dept_no VARCHAR(4),
+	dept_no VARCHAR(4) NOT NULL,
 	FOREIGN KEY (dept_no) REFERENCES departments(dept_no),
 	PRIMARY KEY (emp_no, dept_no)
 );
 
 -- Create Department Manager Table
 CREATE TABLE dept_manager (
-	dept_no VARCHAR(4),
+	dept_no VARCHAR(4) NOT NULL,
 	FOREIGN KEY (dept_no) REFERENCES departments(dept_no),
-	emp_no INT,
+	emp_no INT NOT NULL,
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
 	PRIMARY KEY (dept_no, emp_no)
 );
@@ -42,25 +44,25 @@ CREATE TABLE dept_manager (
 CREATE TABLE salaries (
 	emp_no INT PRIMARY KEY,
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
-	salary INT
+	salary INT NOT NULL
 );
 
--- Confirm data correctly imported into departments table
+-- Departments: Import departments.csv and Confirm data correctly imported
 SELECT * FROM departments;
 
--- Confirm data correctly imported into titles table
+-- Titles: Import titles.csv and Confirm data correctly imported
 SELECT * FROM titles;
 
--- Confirm data correctly imported into employees table
+-- Employees: Import employees.csv and Confirm data correctly imported
 SELECT * FROM employees;
 
--- Confirm data correctly imported into dept_emp table
+-- Department Employees: Import dept_emp.csv and Confirm data correctly imported
 SELECT * FROM dept_emp;
 
--- Confirm data correctly imported into dept_manager table
+-- Department Managers: Import dept_manager.csv and Confirm data correctly imported into dept_manager table
 SELECT * FROM dept_manager;
 
--- Confirm data correctly imported into salaries table
+-- Salaries: Import salaries.csv and Confirm data correctly imported into salaries table
 SELECT * FROM salaries;
 
 -- Data Analysis
